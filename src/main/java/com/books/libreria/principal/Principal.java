@@ -45,7 +45,7 @@ public class Principal {
 
         if (libroBuscado.isPresent()) {
             System.out.println("LibroEncontrado...!!!");
-            System.out.println("Los datos encontrados son: " + libroBuscado.get());
+            System.out.println("Los datos encontrados son: " + libroBuscado.get().titulo() + " " + libroBuscado.get().autor().get(0).autores());
         } else {
             System.out.println("Libro no encontrado");
         }

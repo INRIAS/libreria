@@ -1,7 +1,7 @@
 package com.books.libreria.principal;
 
 import java.util.Comparator;
-import java.util.List;
+import java.util.DoubleSummaryStatistics;
 import java.util.Optional;
 import java.util.Scanner;
 import java.util.stream.Collectors;
@@ -45,10 +45,20 @@ public class Principal {
 
         if (libroBuscado.isPresent()) {
             System.out.println("LibroEncontrado...!!!");
-            System.out.println("Los datos encontrados son: " + libroBuscado.get().titulo() + " " + libroBuscado.get().autor().get(0).autores());
+            System.out.println("Los datos encontrados son: " + libroBuscado.get().titulo() + " "
+                    + libroBuscado.get().autor().get(0).autores());
         } else {
             System.out.println("Libro no encontrado");
         }
+
+        // Estadisticas
+        DoubleSummaryStatistics est = datosBusqueda.resultado().stream()
+                .filter(l -> l.descargas() > 0.0)
+                .collect(Collectors.summarizingDouble(DataLibros::descargas));
+
+        System.out.println("Media de las evaluacione: " + est.getAverage());
+        System.out.println("Episodio peor evaluado: " + est.getMin());
+        System.out.println("Episodio mejor evaluado: " + est.getMax());
 
     }
 }
